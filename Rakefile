@@ -4,3 +4,9 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task default: %w[bdd]
+
+task :bdd do
+  sh 'filewatcher --restart --immediate "lib spec" "rspec"'
+end

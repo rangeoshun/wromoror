@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 
 gem 'opal-rails'
 
+gem 'rspec', '3.7.0'
+gem 'simplecov', :require => false, :group => :test
+
+gem 'filewatcher', '1.0.1'
+gem 'uuidtools', '2.1.5'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
