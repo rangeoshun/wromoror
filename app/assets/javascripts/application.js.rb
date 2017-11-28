@@ -10,6 +10,7 @@ require 'turbolinks'
 # a Ruby equivalent of the require_tree Sprockets directive is available
 require_tree '.'
 
+require 'client.js'
 # puts "hello world!"
 # pp hello: :world
 # require 'console'
@@ -22,11 +23,11 @@ require_tree '.'
 # # == Do some DOM manipulation with jQuery
 # require 'opal-jquery'
 
-# Document.ready? do
-#   Element.find('body').html = '<h1>Hello world!</h1>'
-# end
-
 # # == Or access the DOM api directly
 # $$[:document].addEventListener(:DOMContentLoaded, -> {
 #   $$[:document].querySelector('body')[:innerHTML] = '<h1>Hello world!</h1>'
 # })
+
+Document.ready? do
+  $$.client = Client.new
+end
