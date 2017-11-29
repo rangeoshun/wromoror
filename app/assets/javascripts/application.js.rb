@@ -31,6 +31,8 @@ require 'client.js'
 client = nil
 
 Document.ready? do
+  if !client.nil? then return end
+
   client = $$.client = Client.new
   client.ability_message = "Foo"
   client.message = "Bar"
