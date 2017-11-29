@@ -28,6 +28,11 @@ require 'client.js'
 #   $$[:document].querySelector('body')[:innerHTML] = '<h1>Hello world!</h1>'
 # })
 
+client = nil
+
 Document.ready? do
-  $$.client = Client.new
+  client = $$.client = Client.new
+  client.ability_message = "Foo"
+  client.message = "Bar"
+  client.score = 100
 end

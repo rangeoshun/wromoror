@@ -60,7 +60,7 @@ div.setup {
 	margin-top: 5px;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	//transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 	position: relative;
 	margin: 0 auto;
 	width: 320px;
