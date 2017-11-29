@@ -5,25 +5,25 @@ class Setup
     @client = client
 
     @DEFAULT_NAME = "UNNAMED"
-    @LEGAL_NAME = $$.RegExp("[a-zA-Z0-9]|-|_|'|", "g")
+    @LEGAL_NAME = /\w/
 
-    @name_input = $$.document.querySelector("#name")
+    @name_input = Element.find("#name")
 
-    @name_input.addEventListener(:keydown, handle_name_change)
+    @name_input.on(:keyup) { |event| handle_name_change(event) }
   end
 
   def normalize(name = "")
-    name[0...15].match(@LEGAL_NAME)
+    name[0..15].chars.select { |char| char.match(@LEGAL_NAME) }.join
   end
 
   def handle_name_change(event)
-    $$.console.log(event)
-    if @client.state != 'setup' then return end
+    if @client.state != "setup" then return end
 
-    name = event.target.value || ""
-    @client.change_name(normalize(name))
+    name = normalize(event.target.value || "")
+    @client.change_name(name)
+    @name_input.value = name
 
-    if ev.keyCode == 13
+    if event.which == 13
       @client.go_play
     end
   end
