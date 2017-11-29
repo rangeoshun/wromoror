@@ -8,7 +8,7 @@ class Setup
     @LEGAL_NAME = /\w/
 
     @name_input = Element.find("#name")
-
+    @name_input.value = @DEFAULT_NAME
     @name_input.on(:keyup) { |event| handle_name_change(event) }
   end
 
