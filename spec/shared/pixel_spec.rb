@@ -70,5 +70,16 @@ RSpec.describe Pixel do
 
       expect(pixel.to_hex).to eq "#ffffff"
     end
+
+    it "can be set from a color array as in [<r>, <g>, <b>]" do
+      pixel = Pixel.new
+      color_ary = [0, 1, 0.5]
+
+      pixel.color = color_ary
+
+      expect(pixel.r).to eq 0
+      expect(pixel.g).to eq 255
+      expect(pixel.b).to eq 128
+    end
   end
 end

@@ -1,6 +1,6 @@
 class Byte
-  @@MIN = 0
-  @@MAX = 255
+  MIN = 0
+  MAX = 255
 
   def initialize(value = 0)
     @value = limit(value.to_i)
@@ -34,6 +34,6 @@ class Byte
   private
 
   def limit(value)
-    value > @@MAX ? @@MAX : value < @@MIN ? @@MIN : value
+    value > MAX ? MAX : value < MIN ? MIN : value
   end
 end
