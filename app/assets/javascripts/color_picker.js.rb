@@ -8,7 +8,6 @@ class ColorPicker
     Colors::List.keys.each { |name|
       @palette.html += color_sample(name, Colors::to_hex(name))
     }
-    $$.console.log(Colors)
   end
 
   def color_sample(name, color)
