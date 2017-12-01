@@ -1,4 +1,4 @@
-require 'matrix'
+# require 'matrix'
 require 'shared/byte'
 
 class Pixel
@@ -10,7 +10,7 @@ class Pixel
     @r = Byte.new(r)
     @g = Byte.new(g)
     @b = Byte.new(b)
-    @vector = vector || Vector[0, 0]
+    @vector = vector # || Vector[0, 0]
   end
 
   def r=(value)
@@ -25,7 +25,7 @@ class Pixel
     @b = Byte.new(value)
   end
 
-  def color=(colorAry = [], factor = 1)
+  def color=(colorAry = [])
     @r = Byte.new((colorAry[0] * Byte::MAX).round)
     @g = Byte.new((colorAry[1] * Byte::MAX).round)
     @b = Byte.new((colorAry[2] * Byte::MAX).round)

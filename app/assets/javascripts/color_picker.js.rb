@@ -1,24 +1,22 @@
-require "shared/pixel"
-# require "shared/color_list"
-
-color_sampler = Pixel.new
+require "shared/colors"
 
 class ColorPicker
   def initialize(client)
     @client = client
-    @palette_input = Element.find("#colorPalette")
+    @palette = Element.find("#color_palette")
 
-    color_list.each { |name, colorAry|
-      @palette_input.innerHTML += color_sample(name, colorAry)
+    Colors::List.keys.each { |name|
+      @palette.html += color_sample(name, Colors::to_hex(name))
     }
+    $$.console.log(Colors)
   end
 
-  def color_sample(name, colorAry)
+  def color_sample(name, color)
     "<div
-      id=\"#{name}-color\"
+      id=\"#{name}_color\"
       data-name=\"#{name}\"
-      class=\"color-sample\"
-      style=\"background-color: #{color_sampler.color(colorAry).to_hex};\"
+      class=\"color_sample\"
+      style=\"background-color: #{color};\"
     >
         &nbsp;
     </div>"
