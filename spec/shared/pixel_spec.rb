@@ -1,4 +1,3 @@
-require 'matrix'
 require 'shared/pixel'
 
 RSpec.describe Pixel do
@@ -22,7 +21,7 @@ RSpec.describe Pixel do
 
     it "has the coordinates of 0:0" do
       pixel = Pixel.new
-      expect(pixel.vector).to eq Vector[0, 0]
+      expect(pixel.vector).to eq [0, 0]
     end
 
     it "can return it's color in hex string" do

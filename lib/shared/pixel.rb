@@ -10,7 +10,7 @@ class Pixel
     @r = Byte.new(r)
     @g = Byte.new(g)
     @b = Byte.new(b)
-    @vector = vector # || Vector[0, 0]
+    @vector = vector || [0, 0]
   end
 
   def r=(value)
