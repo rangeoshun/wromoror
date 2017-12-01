@@ -1,8 +1,11 @@
 require "native"
 
+require "color_picker.js"
+
 class Setup
   def initialize(client)
     @client = client
+    @color_picker = ColorPicker.new(client)
 
     @DEFAULT_NAME = "UNNAMED"
     @LEGAL_NAME = /\w/
