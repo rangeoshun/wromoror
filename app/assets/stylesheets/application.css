@@ -16,14 +16,14 @@
 
 body {
 	width: 320px;
-	margin: 0 auto;
+	margin: 80px auto;
 	position: relative;
 	transform-origin: 50% 0%;
 	transform: scale(3);
 }
 
 html {
-	background-color: #646464;
+	background-color: #786abd;
 }
 
 body,
@@ -32,10 +32,9 @@ body label,
 body input,
 body button {
 	outline: none;
-	background-color: #646464;
 	font-smoothing: none;
 	-webkit-font-smoothing: none;
-	color: white;
+	color: #786abd;
 	font-size: 5px;
 	font-family: "C64 Pro Mono", "Consolas", "Myriad", "Arial", Gadget,
 		sans-serif;
@@ -55,8 +54,13 @@ label {
 	margin-top: 5px;
 }
 
+div#main {
+	background-color: #403285;
+}
+
 div.screen,
-div.setup {
+div.setup,
+div.welcome {
 	margin-top: 5px;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
