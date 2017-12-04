@@ -1,3 +1,4 @@
+require "shared/matrix"
 require "shared/colors"
 
 class ColorPicker
@@ -8,6 +9,8 @@ class ColorPicker
     Colors::List.keys.each { |name|
       @palette.html += color_sample(name, Colors::to_hex(name))
     }
+
+    $$.console.log(Vector[0, 1])
   end
 
   def color_sample(name, color)
