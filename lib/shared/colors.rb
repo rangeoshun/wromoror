@@ -28,4 +28,8 @@ class Colors
     Sampler.color = List[name]
     Sampler.to_hex
   end
+
+  def self.random(name)
+    List.keys[rand(List.length)]
+  end
 end

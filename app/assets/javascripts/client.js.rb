@@ -1,7 +1,8 @@
+require "user.js"
 require "setup.js"
 
 class Client
-  attr_reader :state
+  attr_reader :state, :user
 
   def initialize
     @ability_status = Element.find(".status > .abilities")
@@ -12,6 +13,7 @@ class Client
     @score_status = Element.find(".status > .score")
     @go_play_button = Element.find("#goPlay")
 
+    @user = User.new
     @setup = Setup.new(self)
 
     @ability_message = ""
@@ -28,7 +30,11 @@ class Client
   end
 
   def change_name(name = "")
-    $$.console.log(name)
+    @user.name = name
+  end
+
+  def change_color(color = {})
+    @user.color = color
   end
 
   def ability_message=(text = "")
