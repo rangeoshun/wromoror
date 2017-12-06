@@ -5,6 +5,8 @@ require 'turbolinks'
 
 require 'client.js'
 
+require 'websocket_rails/main'
+
 $$[:document].addEventListener(:DOMContentLoaded, -> {
   client = $$.client = Client.new
   client.ability_message = "Foo"
