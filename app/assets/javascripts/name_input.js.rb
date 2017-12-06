@@ -1,4 +1,4 @@
-class Setup
+class NameInput
   LEGAL_NAME = /\w/
 
   def initialize(client)
