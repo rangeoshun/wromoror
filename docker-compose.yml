@@ -51,6 +51,7 @@ services:
             - .:/wrom
         ports:
             - 3000:3000
+            - 3001:3001
         command: rails server
     ruby-test:
         build:

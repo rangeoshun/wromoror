@@ -1,5 +1,6 @@
 require "user.js"
 require "setup.js"
+require "connection.js"
 
 class Client
   attr_reader :state, :user
@@ -15,6 +16,7 @@ class Client
 
     @user = User.new
     @setup = Setup.new(self)
+    @connection = Connection.new
 
     @ability_message = ""
     @message = ""

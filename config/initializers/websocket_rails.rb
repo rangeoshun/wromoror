@@ -37,7 +37,7 @@ WebsocketRails.setup do |config|
   # config.keep_subscribers_when_private = false
 
   # Set to true if you wish to broadcast channel subscriber_join and
-  # subscriber_part events. All subscribers of a channel will be 
+  # subscriber_part events. All subscribers of a channel will be
   # notified when other clients join and part the channel. If you are
   # using the UserManager, the current_user object will be sent along
   # with the event.
@@ -58,6 +58,5 @@ WebsocketRails.setup do |config|
   # Supporting HTTP streaming on Internet Explorer versions 8 & 9
   # requires CORS to be enabled for GET "/websocket" request.
   # List here the origin domains allowed to perform the request.
-  # config.allowed_origins = ['http://localhost:3000']
-
+  config.allowed_origins = ['http://localhost:3000']
 end

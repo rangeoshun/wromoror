@@ -1,11 +1,8 @@
 require 'opal'
 require 'opal_ujs'
-
 require 'turbolinks'
 
 require 'client.js'
-
-require 'websocket_rails/main'
 
 $$[:document].addEventListener(:DOMContentLoaded, -> {
   client = $$.client = Client.new

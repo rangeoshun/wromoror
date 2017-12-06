@@ -8,6 +8,8 @@ gem 'simplecov', :require => false, :group => :test
 gem 'filewatcher', '1.0.1'
 gem 'uuidtools', '2.1.5'
 
+gem 'websocket-rails'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -59,5 +61,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'websocket-rails', '0.7.0'
