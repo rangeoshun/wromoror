@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'opal-rails'
+gem 'opal-jquery'
 
 gem 'rspec', '3.7.0'
 gem 'simplecov', :require => false, :group => :test

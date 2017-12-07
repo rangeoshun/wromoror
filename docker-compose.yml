@@ -52,7 +52,7 @@ services:
         ports:
             - 3000:3000
             - 3001:3001
-        command: rails server
+        command: bash -c "rm -R -f tmp/pids && rails server & tail -f log/websocket_rails.log"
     ruby-test:
         build:
           context: .

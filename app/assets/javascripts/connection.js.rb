@@ -1,10 +1,13 @@
-require 'websocket_rails/main'
+require "websocket_rails.js"
 
 class Connection
   def initialize
     # Use native to avoid `uninitialized constant Connection::WebSocketRails`
-    @socket = Native(`new WebSocketRails('localhost:3000/websocket')`)
-    $$.console.log(@socket)
+    @dispatcher = WebSocketRails::WebSocketRails.new("localhost:3000/websocket")
+    $$.console.log(@dispatcher)
+    @dispatcher.on_open = lambda {
+      @dispatcher.subscribe("game_state")
+    }
   end
 
   private
