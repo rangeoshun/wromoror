@@ -52,7 +52,7 @@ services:
         ports:
             - 3000:3000
             - 3001:3001
-        command: bash -c "rm -R -f tmp/pids && thin start & tail -f log/websocket_rails.log"
+        command: bash -c "rm -R -f tmp/pids && thin start & touch log/websocket_rails.log && tail -f log/websocket_rails.log"
     ruby-test:
         build:
           context: .
