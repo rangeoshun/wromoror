@@ -25,6 +25,8 @@ require "websocket_connection.js"
 #   dispatcher.unbind('event')
 ###
 module WebSocketRails
+  attr_reader :connection
+
   class WebSocketRails
     def initialize(url, use_websockets = true)
       @url = url
@@ -150,7 +152,6 @@ module WebSocketRails
     end
 
     def subscribe(channel_name, success_callback, failure_callback)
-      $$.console.log(self)
       if !@channels[channel_name]
         channel = Channel.new(channel_name, self, false, success_callback, failure_callback)
         @channels[channel_name] = channel

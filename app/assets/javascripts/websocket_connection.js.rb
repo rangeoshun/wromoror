@@ -1,3 +1,7 @@
+require "browser"
+require "browser/event"
+require "browser/socket"
+
 require "abstract_connection.js"
 
 module WebSocketRails
@@ -15,19 +19,24 @@ module WebSocketRails
         @url = "ws://#{url}"
       end
 
-      @connection = Native("new WebSocket(\"#{@url}\")")
-      @connection.onmessage = lambda { |event| on_message(JSON.parse(event[:data])) }
-      @connection.onclose = lambda { |event| on_close(event) }
-      @connection.onerror = lambda { |event| on_error(event) }
+      @connection = Browser::Socket.new @url do
+        on :open do |event| $$.console.log(event) end
+
+        on :message do |event| on_message(JSON.parse(event[:data])) end
+
+        on :close do |event| on_close(event) end
+
+        on :error do |event| on_error(event) end
+      end
     end
 
     def close
-      @connection.close()
+      @connection.close
     end
 
     def send_event(event)
       super(event)
-      @connection.send(event.serialize())
+      @connection.send(event.serialize)
     end
   end
 end

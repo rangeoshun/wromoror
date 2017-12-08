@@ -1,7 +1,6 @@
 require 'opal'
 require 'opal_ujs'
-require 'opal-jquery'
-require 'turbolinks'
+
 require 'client.js'
 
 $$[:document].addEventListener(:DOMContentLoaded, -> {

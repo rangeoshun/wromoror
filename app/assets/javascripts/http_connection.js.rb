@@ -21,8 +21,6 @@ module WebSocketRails
       @connection = create_xml_http_object()
       @last_pos = 0
 
-      $$.console.log(@connection)
-
       begin
         @connection.onreadystatechange = parse_stream
         @connection.addEventListener(:load) { on_close() }

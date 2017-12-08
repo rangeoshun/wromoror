@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'opal-rails'
 gem 'opal-jquery'
+gem 'opal-browser'
 
 gem 'rspec', '3.7.0'
 gem 'simplecov', :require => false, :group => :test
@@ -10,6 +11,10 @@ gem 'filewatcher', '1.0.1'
 gem 'uuidtools', '2.1.5'
 
 gem 'websocket-rails'
+# Force downgrade faye to overcome issue: https://github.com/socketio/socket.io/issues/2045
+gem 'faye-websocket', '0.10.0'
+# Use Thin as the app server
+gem 'thin', '1.7.2'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -21,7 +26,7 @@ gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+# gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
