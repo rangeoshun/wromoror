@@ -19,15 +19,10 @@ module WebSocketRails
         @url = "ws://#{url}"
       end
 
-      @connection = Browser::Socket.new @url do
-        on :open do |event| $$.console.log(event) end
-
-        on :message do |event| on_message(JSON.parse(event.data)) end
-
-        on :close do |event| on_close(event) end
-
-        on :error do |event| on_error(event) end
-      end
+      @connection = Browser::Socket.new @url
+      @connection.on(:message) { |event| on_message(JSON.parse(event.data)) }
+      @connection.on(:close) { |event| on_close(event) }
+      @connection.on(:error) { |event| on_error(event) }
     end
 
     def close
