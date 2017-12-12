@@ -6,6 +6,8 @@ require "abstract_connection.js"
 
 module WebSocketRails
   class WebSocketConnection < AbstractConnection
+    attr_accessor :connection_id
+
     @connection_type = 'websocket'
 
     def initialize(url, dispatcher)

@@ -3,24 +3,28 @@ module WebSocketRails
   # The Event object stores all the relevant event information.
   ###
   class Event
-    def constructor(data, success_callback, failure_callback)
+    attr_accessor :name, :data, :connection_id
+
+    def initialize(data, success_callback, failure_callback)
       @name = data[0]
       @success_callback = success_callback
       @failure_callback = failure_callback
 
       attribute = data[1]
 
-      if attribute
-        @id = attribute['id'] ? attribute['id'] : (((1 + Math.random()) * 0x10000) | 0)
-        @channel = attribute.channel ? attribute.channel : nil
-        @data = attribute.data ? attribute.data : attribute
-        @token = attribute.token ? attribute.token : nil
-        @connection_id = data[2]
+      if attribute.nil?
+        return
+      end
 
-        if attribute.success
-          @result = true
-          @success = attribute.success
-        end
+      @id = attribute['id'] ? attribute['id'] : (((1 + rand * 0x10000) | 0))
+      @channel = attribute[:channel]
+      @data = attribute[:data] || []
+      @token = attribute[:token]
+      @connection_id = data[2]
+
+      if attribute[:success]
+        @result = true
+        @success = attribute[:success]
       end
     end
 
@@ -37,7 +41,7 @@ module WebSocketRails
     end
 
     def serialize
-      JSON.stringify([@name, attributes()])
+      $$.JSON.stringify([@name, attributes])
     end
 
     def attributes

@@ -25,9 +25,9 @@ require "websocket_connection.js"
 #   dispatcher.unbind('event')
 ###
 module WebSocketRails
-  attr_reader :connection
-
   class WebSocketRails
+    attr_accessor :state, :on_open
+
     def initialize(url, use_websockets = true)
       @url = url
       @use_websockets = use_websockets
@@ -39,6 +39,10 @@ module WebSocketRails
       @connection = nil
 
       connect()
+    end
+
+    def connection
+      @connection
     end
 
     def connect
@@ -89,13 +93,13 @@ module WebSocketRails
       for socket_message in data
         event = Event.new(socket_message)
 
-        if event.is_result()
+        if event.is_result
           @queue[event.id].run_callbacks(event.success, event.data)
           @queue[event.id] = nil
-        elsif event.is_channel()
+        elsif event.is_channel
           dispatch_channel(event)
-        elsif event.is_ping()
-          pong()
+        elsif event.is_ping
+          pong
         else
           dispatch(event)
         end
@@ -108,11 +112,11 @@ module WebSocketRails
 
     def connection_established(data)
       @state = 'connected'
-      @connection.connection_id = data.connection_id
+      @connection.connection_id = data[:connection_id]
       @connection.flush_queue()
 
-      if on_open
-        on_open.call(nil, data)
+      if @on_open
+        @on_open.call(nil, data)
       end
     end
 
@@ -216,10 +220,6 @@ module WebSocketRails
         channel.callbacks = callbacks
         channel
       end
-    end
-
-    def on_open=(callback)
-      @on_open = callback
     end
   end
 end
