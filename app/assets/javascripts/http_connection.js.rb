@@ -73,17 +73,19 @@ module WebSocketRails
     end
 
     def parse_stream
-      if @connection.readyState == 3
-        data = @connection.responseText.last(@last_pos)
-        @last_pos = @connection.responseText.length
-        data = data.sub(/\]\]\[\[/, "],[")
+      if @connection.readyState != 3
+        return
+      end
 
-        begin
-          event_data = JSON.parse(data)
-          on_message(event_data)
-        rescue Error
-          print Error.to_s
-        end
+      data = @connection.responseText.last(@last_pos)
+      @last_pos = @connection.responseText.length
+      data = data.sub(/\]\]\[\[/, "],[")
+
+      begin
+        event_data = JSON.parse(data)
+        on_message(event_data)
+      rescue Error
+        print Error.to_s
       end
     end
   end
