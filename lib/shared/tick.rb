@@ -11,6 +11,8 @@ class Tick
     @on_after_tick = []
     @thread = nil
     @is_ticking = false
+
+    Rails.logger.info "Game initialized"
   end
 
   def on_before_tick=(callback = nil)

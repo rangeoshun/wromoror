@@ -1,9 +1,9 @@
 require 'singleton'
+require 'rails/all'
 
 require 'shared/tick'
 
 class Game
-  include Singleton
   attr_accessor :players, :points, :is_server, :tick
 
   def initialize(is_server = false)
@@ -13,6 +13,8 @@ class Game
     @is_server = is_server
     @is_paused = false
 
+    Rails.logger.info "Game initialized"
+
     @tick.on_before_tick = lambda { |players, points|
       print players
       print points
@@ -21,5 +23,3 @@ class Game
     @tick.start
   end
 end
-
-Game.instance
