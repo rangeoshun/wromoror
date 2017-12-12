@@ -1,5 +1,7 @@
+require 'rails/all'
+
 class Tick
-  attr_reader :thread
+  attr_reader :thread, :is_ticking
 
   def initialize(game = nil)
     @game = game
@@ -8,6 +10,7 @@ class Tick
     @on_tick = []
     @on_after_tick = []
     @thread = nil
+    @is_ticking = false
   end
 
   def on_before_tick=(callback = nil)
@@ -28,12 +31,14 @@ class Tick
     @on_before_tick.push(callback)
   end
 
-  def start(step = nil)
+  def start
     delay = 1 / @speed
-
+    @is_ticking = true
+    Rails.logger.info "Tick started"
     @thread = Thread.new do
       loop do
         sleep delay
+        Rails.logger.info "Tick"
         step.call()
       end
     end
@@ -42,6 +47,7 @@ class Tick
   def stop
     @thread.kill
     @thread = nil
+    @is_ticking = false
   end
 
   def handle_callbacks(queue = [])
