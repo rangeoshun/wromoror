@@ -15,11 +15,6 @@ class Game
 
     Rails.logger.info "Game initialized"
 
-    @tick.on_before_tick = lambda { |players, points|
-      print players
-      print points
-    }
-
     @tick.start
   end
 end

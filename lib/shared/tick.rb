@@ -40,7 +40,6 @@ class Tick
     @thread = Thread.new do
       loop do
         sleep delay
-        Rails.logger.info "Tick"
         step.call()
       end
     end
