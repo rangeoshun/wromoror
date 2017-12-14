@@ -12,7 +12,7 @@ module WebSocketRails
   #   awesome_channel.unbind('event')
   ###
   class Channel
-    def constructor(name, dispatcher, is_private = false, on_success, on_failure)
+    def initialize(name, dispatcher, is_private = false, on_success, on_failure)
       @name = name
       @dispatcher = dispatcher
       @is_private = is_private
@@ -50,7 +50,7 @@ module WebSocketRails
     end
 
     def bind(event_name, callback)
-      @callbacks[event_name] |= []
+      @callbacks[event_name] ||= []
       @callbacks[event_name].push(callback)
     end
 

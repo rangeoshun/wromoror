@@ -5,7 +5,8 @@ class Connection
     # Use native to avoid `uninitialized constant Connection::WebSocketRails`
     @dispatcher = WebSocketRails::WebSocketRails.new("localhost:3000/websocket")
 
-    @dispatcher.subscribe("game_state")
+    @game_state_channel = @dispatcher.subscribe("game_state")
+    @game_state_channel.bind("full_update") { |message| $$.console.log(data) }
   end
 
   private

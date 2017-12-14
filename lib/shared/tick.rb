@@ -1,7 +1,8 @@
+require 'thread'
 require 'rails/all'
 
 class Tick
-  attr_reader :thread, :is_ticking
+  attr_reader :thread, :is_ticking, :game
 
   def initialize(game = nil)
     @game = game
@@ -12,7 +13,7 @@ class Tick
     @thread = nil
     @is_ticking = false
 
-    Rails.logger.info "Game initialized"
+    WebsocketRails.logger.info "Tick initialized"
   end
 
   def on_before_tick=(callback = nil)
@@ -34,38 +35,43 @@ class Tick
   end
 
   def start
+    if !@thread.nil? then stop end
+
     delay = 1 / @speed
     @is_ticking = true
-    Rails.logger.info "Tick started"
-    @thread = Thread.new do
-      loop do
-        sleep delay
-        step.call()
-      end
-    end
+
+    @thread = Thread.new(self) { |tick|
+      WebsocketRails.logger.info "Tick started on: #{Thread.current}"
+      # TODO: Find out how to handle exceptions
+      loop {
+        tick.step
+        sleep 1
+        # sleep delay
+      }
+    }
   end
 
   def stop
     @thread.kill
     @thread = nil
     @is_ticking = false
+    WebsocketRails.logger.info "Tick stopped on thread: #{@thread}"
   end
 
   def handle_callbacks(queue = [])
     players = @game.players
     points = @game.points
 
-    queue.each do |callback|
-      need_remove = callback.call(players, points)
-      if need_remove then queue.delete(callback) end
-    end
+    queue.map { |callback|
+      callback[] ? callback : nil
+    }.reject { |callback| callback.nil? }
   end
 
   def step
-    if @game.paused then return end
+    if @game.is_paused then return end
 
-    handle_callbacks(@on_before_tick)
-    handle_callbacks(@on_tick)
-    handle_callbacks(@on_after_tick)
+    @on_before_tick = handle_callbacks(@on_before_tick)
+    @on_tick = handle_callbacks(@on_tick)
+    @on_after_tick = handle_callbacks(@on_after_tick)
   end
 end

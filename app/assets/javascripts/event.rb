@@ -3,7 +3,7 @@ module WebSocketRails
   # The Event object stores all the relevant event information.
   ###
   class Event
-    attr_accessor :name, :data, :connection_id
+    attr_accessor :name, :data, :connection_id, :id, :channel, :success
 
     def initialize(data, success_callback, failure_callback)
       @name = data[0]
@@ -58,8 +58,12 @@ module WebSocketRails
       @result = result
 
       if @success == true
+        if @success_callbacks.nil? then return end
+
         @success_callback.call(nil, @result)
       else
+        if @failure_callback.nil? then return end
+
         @failure_callback.call(nil, @result)
       end
     end

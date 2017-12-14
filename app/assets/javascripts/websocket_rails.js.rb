@@ -140,7 +140,7 @@ module WebSocketRails
     end
 
     def trigger_event(event)
-      @queue[event.id] |= event # Prevent replacing an event that has callbacks stored
+      @queue[event.id] ||= event # Prevent replacing an event that has callbacks stored
 
       if @connection then @connection.trigger(event) end
 
