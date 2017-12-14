@@ -13,12 +13,12 @@ class Game
     @is_server = is_server
     @is_paused = false
 
-    test_callback = lambda {
+    diff_update = lambda {
       WebsocketRails[:game_state].trigger(:full_state, {:message => {}})
       true
     }
 
-    @tick.on_before_tick = test_callback
+    @tick.on_after_tick = diff_update
 
     @tick.start
     WebsocketRails.logger.info "Game initialized"

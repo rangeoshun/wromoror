@@ -6,7 +6,7 @@ class Tick
 
   def initialize(game = nil)
     @game = game
-    @speed = 30
+    @speed = 24
     @on_before_tick = []
     @on_tick = []
     @on_after_tick = []
