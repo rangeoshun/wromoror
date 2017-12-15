@@ -1,16 +1,9 @@
-require "websocket_rails.js"
+require "opal-actioncable"
+require "game_channel.js"
 
 class Connection
   def initialize
-    # Use native to avoid `uninitialized constant Connection::WebSocketRails`
-    @dispatcher = WebSocketRails::WebSocketRails.new("localhost:3000/websocket")
-
-    @game_state_channel = @dispatcher.subscribe("game_state")
-    @game_state_channel.bind("full_update") { |message| $$.console.log(data) }
-  end
-
-  private
-
-  def process_action
+    @consumer = ActionCable.createConsumer
+    @consumer.subscriptions.create GameChannel
   end
 end

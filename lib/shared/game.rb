@@ -1,5 +1,6 @@
 require 'singleton'
 require 'rails/all'
+require 'logger'
 
 require 'shared/tick'
 
@@ -14,13 +15,13 @@ class Game
     @is_paused = false
 
     diff_update = lambda {
-      WebsocketRails[:game_state].trigger(:full_state, {:message => {}})
+      ActionCable.server.broadcast(broadcasting_for(["game_channel"]), {:foo => "bar"})
       true
     }
 
     @tick.on_after_tick = diff_update
 
     @tick.start
-    WebsocketRails.logger.info "Game initialized"
+    Rails.logger.debug "Game initialized"
   end
 end

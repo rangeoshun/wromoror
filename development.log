@@ -1,0 +1,7 @@
+# Logfile created on 2017-12-15 15:04:05 +0000 by logger.rb/v1.2.7
+I, [2017-12-15T15:04:05.760319 #9]  INFO -- : Tick initialized
+I, [2017-12-15T15:04:05.760478 #9]  INFO -- : Game initialized
+I, [2017-12-15T15:04:05.760593 #9]  INFO -- : Tick started on: #<Thread:0x000000030507a0>
+I, [2017-12-15T15:05:19.636985 #11]  INFO -- : Tick initialized
+I, [2017-12-15T15:05:19.637368 #11]  INFO -- : Game initialized
+I, [2017-12-15T15:05:19.637464 #11]  INFO -- : Tick started on: #<Thread:0x000000032d3ba8>

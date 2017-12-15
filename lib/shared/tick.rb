@@ -13,7 +13,7 @@ class Tick
     @thread = nil
     @is_ticking = false
 
-    WebsocketRails.logger.info "Tick initialized"
+    Rails.logger.info "Tick initialized"
   end
 
   def on_before_tick=(callback = nil)
@@ -41,7 +41,7 @@ class Tick
     @is_ticking = true
 
     @thread = Thread.new(self) { |tick|
-      WebsocketRails.logger.info "Tick started on: #{Thread.current}"
+      Rails.logger.info "Tick started on: #{Thread.current}"
       # TODO: Find out how to handle exceptions
       loop {
         tick.step
@@ -55,7 +55,7 @@ class Tick
     @thread.kill
     @thread = nil
     @is_ticking = false
-    WebsocketRails.logger.info "Tick stopped on thread: #{@thread}"
+    Rails.logger.info "Tick stopped on thread: #{@thread}"
   end
 
   def handle_callbacks(queue = [])
