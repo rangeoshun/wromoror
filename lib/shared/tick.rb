@@ -45,7 +45,7 @@ class Tick
       # TODO: Find out how to handle exceptions
       loop {
         tick.step
-        sleep 1
+        sleep 1 # long sleep for development
         # sleep delay
       }
     }

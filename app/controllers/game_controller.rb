@@ -1,3 +1,4 @@
+require 'json'
 require "server/player"
 
 class GameController < WebsocketRails::BaseController
@@ -9,7 +10,11 @@ class GameController < WebsocketRails::BaseController
     Wromoror::GAME.players.push(player)
 
     init_message = {:message => {}}
-    send_message(:game_state, init_message)
+    WebsocketRails.users[connection.id].send_message(:game_state, init_message)
+  end
+
+  def client_updated
+    WebsocketRails.logger.info
   end
 
   def client_input

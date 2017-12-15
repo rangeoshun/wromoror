@@ -9,6 +9,11 @@ class Connection
     @game_state_channel.bind("full_update") { |message| $$.console.log(data) }
   end
 
+  def update_client(message)
+    $$.console.log(self)
+    @dispatcher.trigger("client_updated", {:message => message})
+  end
+
   private
 
   def process_action

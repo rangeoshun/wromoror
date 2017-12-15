@@ -33,6 +33,9 @@ class Client
 
   def change_name(name = "")
     @user.name = name
+    @connection.update_client({
+      :name => name,
+    })
   end
 
   def change_color(color = {})

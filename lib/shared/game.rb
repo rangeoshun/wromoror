@@ -14,7 +14,7 @@ class Game
     @is_paused = false
 
     diff_update = lambda {
-      WebsocketRails[:game_state].trigger(:full_state, {:message => {}})
+      WebsocketRails[:game_state].trigger(:diff_state, {:message => {}})
       true
     }
 
